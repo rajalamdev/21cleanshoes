@@ -1,5 +1,5 @@
 export const images = [
-    "/before.png",
-    "/after.png",
+    "/shoes-before.png",
+    "/shoes-after.png",
   ];
   
