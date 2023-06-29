@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { wrap } from "framer-motion";
 import { images } from "../../utils/image-data";
 import Navbar from "./components/Navbar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Footer from "./components/Footer";
 
 const fadeIn = {
   enter: (direction) => {
@@ -49,8 +50,15 @@ const swipePower = (offset, velocity) => {
 export default function Home() {
   const [[page, direction], setPage] = useState([0, 0]);
   
+  const [scrollY, setScrollY] = useState(0)
 
   const imageIndex = wrap(0, images.length, page);
+
+  useEffect(() => {
+    setTimeout(() => {
+      paginate(1)
+    }, 5000)
+  }, [page])
 
   const paginate = (newDirection) => {
     setPage([page + newDirection, newDirection]);
@@ -254,15 +262,16 @@ export default function Home() {
         <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
             <Image src={"/testimonials/arrow.png"} width={60} height={60} className="absolute scale-[.8] sm:scale-100 -left-2 sm:left-8 cursor-pointer" />
             <div className="relative">
-              <Image src={"/quote.png"} width={30} height={30} className="absolute -left-8 -top-4" />
-              <p className="text-white text-base font-medium text-center sm:text-xl w-60 sm:w-96">Treatment pencucian untuk menghilangkan noda dan aman untuk semua bahan.</p>
-              <Image src={"/quote.png"} width={30} height={30} className="rotate-180 absolute -right-8" />
+              <Image src={"/quote.png"} width={30} height={30} className="absolute sm:-left-16 -left-8 -top-8" />
+              <p className="text-white text-base text-center sm:text-xl w-60 sm:w-[560px]">Treatment pencucian untuk menghilangkan noda dan aman untuk semua bahan.</p>
+              <Image src={"/quote.png"} width={30} height={30} className="rotate-180 absolute sm:-right-16 -right-8" />
             </div>
             <div className="mt-8 h-[2px] w-24 bg-white"></div>
             <p className="text-white mt-8">Marsha lenathea lavia</p>
             <Image src={"/testimonials/person-1.png"} width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100 " />
-            <Image src={"/testimonials/arrow.png"} width={60} height={60} className="absolute scale-[.8] sm:scale-100 -right-2 sm:right-8 rotate-180 cursor-pointer" />
+            <Image src={"/testimonials/arrow.png"} width={60} height={60} className="absolute scale-[.8] sm:scale-100 -right-2 sm:right-10 rotate-180 cursor-pointer" />
         </section>
+        <Footer />
       </main>
     </>
   );

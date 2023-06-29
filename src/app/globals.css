@@ -52,6 +52,26 @@
     box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
   }
 
+  nav.active {
+    @apply bg-white/90 backdrop-blur-md transition-all shadow-md
+  }
+
+  nav a {
+    @apply text-white/80 font-normal
+  }
+
+  nav a.active {
+    @apply text-white font-medium relative after:absolute after:left-0 after:right-0 after:h-[3px] after:w-2/3 after:rounded-full after:mx-auto after:bg-white after:-bottom-2
+  }
+
+  nav.active a {
+    @apply text-black font-normal
+  }
+
+  nav.active a.active {
+    @apply text-black after:bg-black font-medium
+  }
+
   main {
     scroll-snap-type: y proximity;
     overflow-y: scroll;
