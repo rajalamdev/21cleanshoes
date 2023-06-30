@@ -99,7 +99,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       paginate(1)
-    }, 5000)
+    }, 3000)
     return () => clearInterval(interval)
   }, [page])
 
