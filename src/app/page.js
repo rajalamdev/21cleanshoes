@@ -97,9 +97,10 @@ export default function Home() {
   const imageIndex = wrap(0, images.length, page);
 
   useEffect(() => {
-    setTimeout(() => {
+    const interval = setInterval(() => {
       paginate(1)
     }, 5000)
+    return () => clearInterval(interval)
   }, [page])
 
   const paginate = (newDirection) => {
