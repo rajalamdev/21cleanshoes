@@ -77,7 +77,7 @@ import { usePathname } from "next/navigation";
           <motion.div variants={logo} transition={{
             duration: .2
           }} initial="hidden" animate="visible" className="flex gap-2 items-center scale-75 md:scale-100">
-            <Image src={"/logo.png"} alt="logo 21cleanshoes" width={70} height={70} className='scale-[.8]' />
+            <Image src={"/logo.png"} alt="logo 21cleanshoes" width={60} height={60} className='scale-[.8]' />
           </motion.div>
           <motion.div variants={nav} initial="closed" animate="open" className={`md:flex gap-12 text-md font-medium hidden`}>
             {navLinks.map(link => {
