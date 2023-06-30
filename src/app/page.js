@@ -302,7 +302,7 @@ export default function Home() {
           </motion.button>
         </section>
         <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
-            <motion.div variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute -left-2 sm:left-8">
+            <motion.div variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-8">
               <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 cursor-pointer" />
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="relative">
@@ -315,7 +315,7 @@ export default function Home() {
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible">
               <Image src={"/testimonials/person-1.png"} width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100 " />
             </motion.div>
-            <motion.div variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute -right-2 sm:right-10">
+            <motion.div variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-10">
               <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
             </motion.div>
         </section>
