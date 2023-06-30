@@ -26,26 +26,26 @@
   }
 
   ::-webkit-scrollbar {
-    width: 2em;  /* Total width including `border-width` of scrollbar thumb */
+    width: 2em; /* Total width including `border-width` of scrollbar thumb */
     height: 0;
     display: none;
   }
   ::-webkit-scrollbar-thumb {
     height: 1em;
-    border: .7em solid rgba(0, 0, 0, 0);  /* Transparent border together with `background-clip: padding-box` does the trick */
+    border: 0.7em solid rgba(0, 0, 0, 0); /* Transparent border together with `background-clip: padding-box` does the trick */
     background-clip: padding-box;
     -webkit-border-radius: 1em;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
   }
 
   ::-webkit-scrollbar-button {
-      width: 0;
-      height: 0;
-      display: none;
+    width: 0;
+    height: 0;
+    display: none;
   }
   ::-webkit-scrollbar-corner {
-      background-color: transparent;
+    background-color: transparent;
   }
 
   .shadow-custom {
@@ -53,33 +53,38 @@
   }
 
   nav.active {
-    @apply bg-white/90 backdrop-blur-md transition-all shadow-md
+    @apply bg-white/90 backdrop-blur-md transition-all shadow-md;
   }
 
   nav a {
-    @apply text-white/80 font-normal
+    @apply text-white/80 font-normal;
   }
 
   nav a.active {
-    @apply text-white font-medium relative after:absolute after:left-0 after:right-0 after:h-[3px] after:w-2/3 after:rounded-full after:mx-auto after:bg-white after:-bottom-2
+    @apply text-white font-medium relative after:absolute after:left-0 after:right-0 after:h-[3px] after:w-2/3 after:rounded-full after:mx-auto after:bg-white after:-bottom-2;
   }
 
   nav.active a {
-    @apply text-black font-normal
+    @apply text-black font-normal;
   }
 
   nav.active a.active {
-    @apply text-black after:bg-black font-medium
+    @apply text-black after:bg-black font-medium;
   }
 
-  main {
-    scroll-snap-type: y proximity;
-    overflow-y: scroll;
-    height: 100vh;
+  .navMobile a {
+    @apply text-black/80 font-normal;
   }
 
-  section {
-    scroll-snap-align: start;
-    position: relative;
+  .navMobile a.active {
+    @apply text-black font-medium relative after:absolute after:left-0 after:right-0 after:h-[3px] after:w-2/3 after:rounded-full after:mx-auto after:bg-white after:-bottom-2;
+  }
+
+  .navMobile a {
+    @apply text-black font-normal;
+  }
+
+  .navMobile a.active {
+    @apply text-black after:bg-black font-medium;
   }
 }

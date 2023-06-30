@@ -9,38 +9,80 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Footer from "./components/Footer";
 
-const fadeIn = {
-  enter: (direction) => {
-    return {
+  const fadeIn = {
+    hidden: {
       opacity: 0
-    };
-  },
-  center: {
-    opacity: 1
-  },
-  exit: (direction) => {
-    return {
-      x: direction < 0 ? -1000 : 1000,
-      opacity: 0
-    };
-  }
-}
-
-const slideUp = {
-  from: {
-    y: "100%",
-    opacity: 0,
-  },
-  to: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      ease: "linear",
-      duration: 0,
-      delay: .1
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 1
+      }
     }
   }
-}
+
+  const fadeInPopUp = {
+    hidden: {
+      opacity: 0,
+      scale: 0.5,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+    }
+  }
+
+  const slideUp = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 }
+      }
+    },
+    hidden: {
+      y: 100,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 }
+      }
+    }
+  }
+
+  const widthToRight = {
+    hidden: {
+      width: 0
+    }, 
+    visible: {
+      width: "auto",
+      transition: {
+        ease: "linear",
+        duration: .5,
+      }
+    }
+  }
+
+  const widthMaxToRight = {
+    hidden: {
+      width: 0
+    }, 
+    visible: {
+      width: "max-content",
+      transition: {
+        ease: "linear",
+        duration: .1,
+      }
+    }
+  }
+
+  const container = {
+    hidden: {
+      transition: { staggerChildren: 0.07, delayChildren: 0.2 }
+    },
+    visible: {
+      transition: { staggerChildren: 0.05, staggerDirection: -1 }
+    }
+  }
 
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset, velocity) => {
@@ -66,14 +108,6 @@ export default function Home() {
 
   const beforeAfterHeader = ["BEFORE", "AFTER"]
   const beforeAfterText = ["Potret sepatu sebelum dicuci menggunakan jasa 21Cleanshoes", "Potret sepatu setelah dicuci menggunakan jasa 21Cleanshoes"]
-  const pathname = usePathname();
-  const navLinks = [
-      {href: "/", name: "Home"},
-      {href: "/about", name: "About"},
-      {href: "/services", name: "Services"},
-      {href: "/gallery", name: "Gallery"},
-      {href: "/contact", name: "Contact"},
-  ]
 
   const services = [
     {
@@ -102,19 +136,19 @@ export default function Home() {
       <main>
         <section className='bg-[url("/bg.png")] h-screen bg-cover bg-center bg-no-repeat'>
           <div className="w-full flex items-center h-full relative overflow-x-hidden">
-            <div className="-right-4 absolute group z-10">
+            <motion.div variants={fadeInPopUp} initial="hidden" whileInView="visible" className="-right-4 absolute group z-10">
               <Image src={"/next-arrow.svg"} alt="left arrow" className="group-hover:translate-x-1 active:scale-90 transition-all cursor-pointer" onClick={() => paginate(1)} width={60} height={60} />
-            </div>
-            <div className="-left-4 absolute group z-10">
+            </motion.div>
+            <motion.div variants={fadeInPopUp} initial="hidden" whileInView="visible" className="-left-4 absolute group z-10">
               <Image src={"/before-arrow.svg"} alt="right arrow" className="group-hover:-translate-x-1 active:scale-90 transition-all cursor-pointer" onClick={() => paginate(-1)} width={60} height={60} />
-            </div>
+            </motion.div>
             <motion.div
                 className="mx-auto relative px-12 z-0"
                 key={page}
                 variants={fadeIn}
                 custom={direction}
-                initial="enter"
-                whileInView="center"
+                initial="hidden"
+                whileInView="visible"
                 viewport={{once: false, amount: 0.25}}
                 transition={{
                   opacity: { duration: 1 }
@@ -140,8 +174,8 @@ export default function Home() {
                   <motion.h2 key={page}
                     variants={fadeIn}
                     custom={direction}
-                    initial="enter"
-                    whileInView="center"
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{once: false, amount: 0.25}}
                     transition={{
                       opacity: { duration: 1 }
@@ -155,8 +189,8 @@ export default function Home() {
                     key={page}
                     variants={fadeIn}
                     custom={direction}
-                    initial="enter"
-                    whileInView="center"
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{once: false, amount: 0.25}}
                     transition={{ type: "spring", stiffness: 100 }}
                   >
@@ -165,58 +199,65 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 justify-center sm:pl-20 items-end gap-8">
-                <motion.button
-                  variants={slideUp}
-                  initial="from"
-                  whileInView="to"
+                <motion.a href=""
+                  variants={fadeIn}
+                  initial="hidden"
+                  whileInView="visible"
                   whileTap={{ scale: .9 }}
-                  className="bg-[#333] text-white w-36 font-medium active:scale-90 transition-all rounded-md px-4 py-[8px]"
+                  className="bg-[#333] text-white text-center w-36 font-medium active:scale-90 transition-all rounded-md px-4 py-[8px]"
                   >
                   Contact
-                </motion.button>
-                <motion.button
-                    variants={slideUp}
-                    initial="from"
-                    whileInView="to"
+                </motion.a>
+                <motion.a href="https://wa.link/ovmaki"
+                    variants={fadeIn}
+                    initial="hidden"
+                    whileInView="visible"
                     whileTap={{ scale: .9 }}
-                  className="bg-white text-black font-medium active:scale-90 transition-all shadow-custom w-36 rounded-md px-4 py-[8px]">
+                  className="bg-white text-black font-medium text-center active:scale-90 transition-all shadow-custom w-36 rounded-md px-4 py-[8px]">
                   Order Now
-                </motion.button>
+                </motion.a>
               </div>
             </div>
           </div>
         </section>
-        <section className="px-6 md:px-12 lg:px-24 py-12 h-max lg:h-screen">
-          <div className="border-b-[3px] pb-2">
-            <h2 className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">ABOUT 21CLEANSHOES</h2>
-          </div>
+        <motion.section variants={container} initial="closed" whileInView="open" className="px-6 md:px-12 lg:px-24 py-12 h-max lg:h-screen">
+          <motion.div 
+            variants={widthToRight}
+            initial="hidden"
+            whileInView="visible"
+            className="border-b-[3px] pb-2">
+            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">ABOUT 21CLEANSHOES</motion.h2>
+          </motion.div>
           <div className="mt-8 flex flex-col gap-8 lg:flex-row">
-            <div className="flex-1 relative flex justify-center lg:block">
+            <motion.div variants={fadeInPopUp} initial="hidden"
+            whileInView="visible" className="flex-1 relative flex justify-center lg:block">
               <Image src={"/logo.png"} width={150} height={150} />
-            </div>
+            </motion.div>
             <div className="space-y-4 flex-[5] text-justify md:text-lg">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nisi, placeat fugit id veritatis iure explicabo a asperiores, reiciendis facere incidunt voluptas quae est officia eveniet sequi ut consectetur inventore minima eaque quisquam dolore nulla maxime! Blanditiis dicta tenetur voluptates molestias inventore exercitationem, aliquam obcaecati error commodi soluta totam eum dolore dolorum? Asperiores neque voluptatibus vero dicta porro nostrum id.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi ut recusandae laudantium vitae delectus ipsa? Beatae iure quod ipsa quas veniam, maiores eligendi in vitae. Laborum, adipisci fugit at laudantium earum libero consequatur sit, dolorum repellendus accusamus harum itaque.</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aperiam, voluptate quos fugiat adipisci necessitatibus officiis recusandae aut eligendi molestias ad, natus velit obcaecati sit reiciendis deserunt quis mollitia ipsam quaerat laborum voluptatem! Delectus maxime explicabo temporibus, reiciendis molestiae aliquid mollitia cumque magnam nisi eum quos quibusdam, ipsa provident harum?</p>
+              <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nisi, placeat fugit id veritatis iure explicabo a asperiores, reiciendis facere incidunt voluptas quae est officia eveniet sequi ut consectetur inventore minima eaque quisquam dolore nulla maxime! Blanditiis dicta tenetur voluptates molestias inventore exercitationem, aliquam obcaecati error commodi soluta totam eum dolore dolorum? Asperiores neque voluptatibus vero dicta porro nostrum id.</motion.p>
+              <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi ut recusandae laudantium vitae delectus ipsa? Beatae iure quod ipsa quas veniam, maiores eligendi in vitae. Laborum, adipisci fugit at laudantium earum libero consequatur sit, dolorum repellendus accusamus harum itaque.</motion.p>
+              <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aperiam, voluptate quos fugiat adipisci necessitatibus officiis recusandae aut eligendi molestias ad, natus velit obcaecati sit reiciendis deserunt quis mollitia ipsam quaerat laborum voluptatem! Delectus maxime explicabo temporibus, reiciendis molestiae aliquid mollitia cumque magnam nisi eum quos quibusdam, ipsa provident harum?</motion.p>
               <motion.button
-                variants={slideUp}
-                initial="from"
-                whileInView="to"
+                variants={fadeIn}
+                initial="hidden"
+                whileInView="visible"
                 whileTap={{ scale: .9 }}
                 className="bg-[#333] text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
                 {"Detail ->"}
               </motion.button>
             </div>
           </div>
-        </section>
+        </motion.section>
         <section className="px-6 md:px-12 lg:px-24 h-max lg:h-screen py-12 bg-[#F4F5F9] flex flex-col">
-          <div className="border-b-[3px] pb-2">
-            <h2 className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">OUR SERVICES</h2>
-          </div>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div variants={widthToRight}
+            initial="hidden"
+            whileInView="visible" className="border-b-[3px] pb-2">
+            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">OUR SERVICES</motion.h2>
+          </motion.div>
+          <motion.div variants={container} initial={false} whileInView="visible" className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => {
               return (
-                <div className="bg-white py-12 flex flex-col items-center h-full rounded-xl">
+                <motion.div variants={slideUp} initial="hidden" whileInView="visible" className="bg-white py-12 flex flex-col items-center h-full rounded-xl">
                     <div>
                       <Image src={service.image} width={250} height={300} />
                     </div>
@@ -224,52 +265,58 @@ export default function Home() {
                       <h3 className="text-center font-semibold md:text-lg border-b-2 border-b-black pb-2 w-max mx-auto">{service.headline}</h3>
                       <p className="text-center text-[#333]">{service.desc}</p>
                     </div>
-                </div>
+                </motion.div>
               )
             })}
-          </div>
+          </motion.div>
           <motion.button
-            variants={slideUp}
-            initial="from"
-            whileInView="to"
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
             whileTap={{ scale: .9 }}
             className="bg-[#333] mt-8 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
             {"Detail ->"}
           </motion.button>
         </section>
         <section className="px-6 md:px-12 lg:px-24 py-12 flex flex-col">
-          <div className="border-b-[3px] pb-2">
-            <h2 className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</h2>
-          </div>
+          <motion.div variants={widthToRight} initial="hidden" whileInView="visible" className="border-b-[3px] pb-2">
+            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
+          </motion.div>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {galleries.map(gallery => {
               return (
-                <div className="rounded-lg overflow-hidden mx-auto">
+                <motion.div variants={slideUp} initial="hidden" whileInView="visible" className="rounded-lg overflow-hidden mx-auto">
                   <Image src={gallery} width={400} height={400} />
-                </div>
+                </motion.div>
               )
             })}
           </div>
           <motion.button
-            variants={slideUp}
-            initial="from"
-            whileInView="to"
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
             whileTap={{ scale: .9 }}
             className="bg-[#333] mt-8 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
             {"Detail ->"}
           </motion.button>
         </section>
         <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
-            <Image src={"/testimonials/arrow.png"} width={60} height={60} className="absolute scale-[.8] sm:scale-100 -left-2 sm:left-8 cursor-pointer" />
-            <div className="relative">
+            <motion.div variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute -left-2 sm:left-8">
+              <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 cursor-pointer" />
+            </motion.div>
+            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="relative">
               <Image src={"/quote.png"} width={30} height={30} className="absolute sm:-left-16 -left-8 -top-8" />
               <p className="text-white text-base text-center sm:text-xl w-60 sm:w-[560px]">Treatment pencucian untuk menghilangkan noda dan aman untuk semua bahan.</p>
               <Image src={"/quote.png"} width={30} height={30} className="rotate-180 absolute sm:-right-16 -right-8" />
-            </div>
-            <div className="mt-8 h-[2px] w-24 bg-white"></div>
-            <p className="text-white mt-8">Marsha lenathea lavia</p>
-            <Image src={"/testimonials/person-1.png"} width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100 " />
-            <Image src={"/testimonials/arrow.png"} width={60} height={60} className="absolute scale-[.8] sm:scale-100 -right-2 sm:right-10 rotate-180 cursor-pointer" />
+            </motion.div>
+            <motion.div initial={{opacity: 0, width: 0}} whileInView={{opacity: 1, width: 96}} className="mt-8 h-[2px] w-24 bg-white"></motion.div>
+            <motion.p variants={fadeIn} initial="hidden" whileInView="visible" className="text-white mt-8">Marsha lenathea lavia</motion.p >
+            <motion.div variants={fadeIn} initial="hidden" whileInView="visible">
+              <Image src={"/testimonials/person-1.png"} width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100 " />
+            </motion.div>
+            <motion.div variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute -right-2 sm:right-10">
+              <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
+            </motion.div>
         </section>
         <Footer />
       </main>
