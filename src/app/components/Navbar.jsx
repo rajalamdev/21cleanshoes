@@ -46,15 +46,14 @@ import { usePathname } from "next/navigation";
     const pathname = usePathname();
     const navLinks = [
         {href: "/", name: "Home"},
-        {href: "/about", name: "About"},
         {href: "/services", name: "Services"},
         {href: "/gallery", name: "Gallery"},
+        {href: "/testimonials", name: "Testimonials"},
         {href: "/contact", name: "Contact"},
     ]
     const [openSidebar, setOpenSidebar] = useState(false)
 
   useEffect(() => {
-    const main = document.querySelector("main");
     const nav = document.querySelector("nav");
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
@@ -65,7 +64,7 @@ import { usePathname } from "next/navigation";
         nav.classList.remove("active")
       }
     })
-  })
+  }, [])
 
   function toggleSidebar(){
     setOpenSidebar(!openSidebar)
@@ -78,11 +77,12 @@ import { usePathname } from "next/navigation";
             duration: .2
           }} initial="hidden" animate="visible" className="flex gap-2 items-center scale-75 md:scale-100">
             <Image src={"/logo.png"} alt="logo 21cleanshoes" width={70} height={70} className='scale-[.8]' />
+            {/* <p className='text-xl font-bold'>21Cleanshoes</p> */}
           </motion.div>
           <motion.div variants={nav} initial="closed" animate="open" className={`md:flex gap-12 text-md font-medium hidden`}>
             {navLinks.map(link => {
               return (
-                <motion.div variants={navLink}>
+                <motion.div key={link.name} variants={navLink}>
                   <Link key={link.href} className={`${pathname == link.href ? "active" : ""} hover:opacity-80 drop-shadow-2xl`} href={link.href}>{link.name}</Link>
                 </motion.div>
               )
@@ -99,7 +99,7 @@ import { usePathname } from "next/navigation";
         <motion.div variants={nav} initial={false} animate={`${openSidebar ? "open" : "closed"}`} className={`navMobile flex flex-col justify-center gap-12 items-center bg-white fixed top-0 left-0 right-0 bottom-0 z-40  transition-transform duration-[200ms] ease-in ${openSidebar ? "translate-y-0": "-translate-y-full"}`}>
             {navLinks.map(link => {
               return (
-                <motion.div variants={navLink}>
+                <motion.div key={link.name} variants={navLink}>
                   <Link key={link.href} className={`${pathname == link.href ? "active" : ""} text-xl hover:opacity-80 drop-shadow-2xl`} href={link.href}>{link.name}</Link>
                 </motion.div>
               )

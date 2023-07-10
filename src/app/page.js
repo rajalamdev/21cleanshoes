@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { wrap } from "framer-motion";
-import { images } from "../../utils/image-data";
+import { images, testimonials } from "../../utils/data";
 import Navbar from "./components/Navbar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -20,6 +20,26 @@ import Footer from "./components/Footer";
       }
     }
   }
+
+  const swipe = {
+    hidden: (direction) => {
+      return {
+        x: direction > 0 ? 1000 : -1000,
+        opacity: 0
+      }
+    },
+    visible: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => {
+      return {
+        x: direction < 0 ? 1000 : -1000,
+        opacity: 0
+      }
+    }
+  }
+
 
   const fadeInPopUp = {
     hidden: {
@@ -91,10 +111,10 @@ const swipePower = (offset, velocity) => {
 
 export default function Home() {
   const [[page, direction], setPage] = useState([0, 0]);
+  const [[pageTesti, directionTesti], setPageTesti] = useState([0, 0]);
   
-  const [scrollY, setScrollY] = useState(0)
-
   const imageIndex = wrap(0, images.length, page);
+  const testiIndex = wrap(0, testimonials.length, pageTesti);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,6 +126,10 @@ export default function Home() {
   const paginate = (newDirection) => {
     setPage([page + newDirection, newDirection]);
   };
+
+  const testiPaginateHandler = (newDirection) => {
+    setPageTesti([pageTesti + newDirection, newDirection])
+  }
 
   const beforeAfterHeader = ["BEFORE", "AFTER"]
   const beforeAfterText = ["Potret sepatu sebelum dicuci menggunakan jasa 21Cleanshoes", "Potret sepatu setelah dicuci menggunakan jasa 21Cleanshoes"]
@@ -147,7 +171,6 @@ export default function Home() {
                 className="mx-auto relative px-12 z-0"
                 key={page}
                 variants={fadeIn}
-                custom={direction}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{once: false, amount: 0.25}}
@@ -159,7 +182,6 @@ export default function Home() {
                 dragElastic={1}
                 onDragEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
-      
                   if (swipe < -swipeConfidenceThreshold) {
                     paginate(1);
                   } else if (swipe > swipeConfidenceThreshold) {
@@ -167,7 +189,7 @@ export default function Home() {
                   }
                 }}
                 >
-                <Image src={images[imageIndex]} width={500} height={500} alt="shoes image" />
+                <Image src={images[imageIndex]} priority width={500} height={500} alt="shoes image" />
             </motion.div>
             <div className="absolute flex-wrap flex gap-8 flex-col sm:flex-row max-w-full left-0 right-0 px-6 md:px-12 sm:px-24 bottom-24 md:bottom-24">
               <div className="w-full md:w-1/3">
@@ -200,7 +222,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 justify-center sm:pl-20 items-end gap-8">
-                <motion.a href=""
+                <motion.a href="#"
                   variants={fadeIn}
                   initial="hidden"
                   whileInView="visible"
@@ -232,7 +254,7 @@ export default function Home() {
           <div className="mt-8 flex flex-col gap-8 lg:flex-row">
             <motion.div variants={fadeInPopUp} initial="hidden"
             whileInView="visible" className="flex-1 relative flex justify-center lg:block">
-              <Image src={"/logo.png"} width={150} height={150} />
+              <Image src={"/logo.png"} width={150} height={150} alt="logo 21cleanshoes" />
             </motion.div>
             <div className="space-y-4 flex-[5] text-justify md:text-lg">
               <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nisi, placeat fugit id veritatis iure explicabo a asperiores, reiciendis facere incidunt voluptas quae est officia eveniet sequi ut consectetur inventore minima eaque quisquam dolore nulla maxime! Blanditiis dicta tenetur voluptates molestias inventore exercitationem, aliquam obcaecati error commodi soluta totam eum dolore dolorum? Asperiores neque voluptatibus vero dicta porro nostrum id.</motion.p>
@@ -258,9 +280,9 @@ export default function Home() {
           <motion.div variants={container} initial={false} whileInView="visible" className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => {
               return (
-                <motion.div variants={slideUp} initial="hidden" whileInView="visible" className="bg-white py-12 flex flex-col items-center h-full rounded-xl">
+                <motion.div key={service.headline} variants={slideUp} initial="hidden" whileInView="visible" className="bg-white py-12 flex flex-col items-center h-full rounded-xl">
                     <div>
-                      <Image src={service.image} width={250} height={300} />
+                      <Image src={service.image} width={250} height={300} alt="services image" />
                     </div>
                     <div className="-mt-12 space-y-4 px-12">
                       <h3 className="text-center font-semibold md:text-lg border-b-2 border-b-black pb-2 w-max mx-auto">{service.headline}</h3>
@@ -284,10 +306,10 @@ export default function Home() {
             <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
           </motion.div>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {galleries.map(gallery => {
+            {galleries.map((gallery, i) => {
               return (
-                <motion.div variants={slideUp} initial="hidden" whileInView="visible" className="rounded-lg overflow-hidden mx-auto">
-                  <Image src={gallery} width={400} height={400} />
+                <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="rounded-lg overflow-hidden mx-auto">
+                  <Image src={gallery} width={400} height={400} alt="gallery image" />
                 </motion.div>
               )
             })}
@@ -302,22 +324,29 @@ export default function Home() {
           </motion.button>
         </section>
         <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
-            <motion.div variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-8">
-              <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 cursor-pointer" />
-            </motion.div>
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="relative">
-              <Image src={"/quote.png"} width={30} height={30} className="absolute sm:-left-16 -left-8 -top-8" />
-              <p className="text-white text-base text-center sm:text-xl w-60 sm:w-[560px]">Treatment pencucian untuk menghilangkan noda dan aman untuk semua bahan.</p>
-              <Image src={"/quote.png"} width={30} height={30} className="rotate-180 absolute sm:-right-16 -right-8" />
-            </motion.div>
-            <motion.div initial={{opacity: 0, width: 0}} whileInView={{opacity: 1, width: 96}} className="mt-8 h-[2px] w-24 bg-white"></motion.div>
-            <motion.p variants={fadeIn} initial="hidden" whileInView="visible" className="text-white mt-8">Marsha lenathea lavia</motion.p >
-            <motion.div variants={fadeIn} initial="hidden" whileInView="visible">
-              <Image src={"/testimonials/person-1.png"} width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100 " />
-            </motion.div>
-            <motion.div variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-10">
-              <Image src={"/testimonials/arrow.png"} width={60} height={60} className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
-            </motion.div>
+            <motion.button onClick={() => testiPaginateHandler(-1)} variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-8">
+              <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi left arrow button" className="scale-[.8] sm:scale-100 cursor-pointer" />
+            </motion.button>
+            <AnimatePresence mode="wait" custom={directionTesti} >
+              <motion.div className="flex items-center flex-col" key={pageTesti} variants={swipe} custom={directionTesti} initial="hidden" animate="visible" exit="exit" transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: {duration: 0.2}
+                }}>
+                <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="relative">
+                  <Image alt="quote icon" src={"/quote.png"} width={30} height={30} className="absolute sm:-left-16 -left-8 -top-8" />
+                  <p className="text-white text-base text-center sm:text-xl w-60 sm:w-[560px]">{testimonials[testiIndex].headline}</p>
+                  <Image alt="quote icon" src={"/quote.png"} width={30} height={30} className="rotate-180 absolute sm:-right-16 -right-8" />
+                </motion.div>
+                <motion.div initial={{opacity: 0, width: 0}} whileInView={{opacity: 1, width: 96}} className="mt-8 h-[2px] w-24 bg-white"></motion.div>
+                  <motion.p variants={fadeIn} initial="hidden" whileInView="visible" className="text-white mt-8">{testimonials[testiIndex].name}</motion.p >
+                <motion.div variants={fadeIn} initial="hidden" whileInView="visible">
+                  <Image src={testimonials[testiIndex].image} alt="Testimonial person image" width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100" />
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+            <motion.button onClick={() => testiPaginateHandler(1)} variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-10">
+              <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi right arrow button" className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
+            </motion.button>
         </section>
         <Footer />
       </main>

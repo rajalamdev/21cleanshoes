@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,24 +21,24 @@ const Footer = () => {
     <footer className='snap-start relative'>
         <div className='bg-[#272D2E] flex justify-between flex-wrap gap-8 py-12 md:px-12 lg:px-24 px-6'>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
-                <Image src={"/footer/phone-icon.png"} width={40} height={40} className='self-start' />
+                <Image src={"/footer/phone-icon.png"} alt='phone icon' width={40} height={40} className='self-start' />
                 <div>
-                  <h6 className='text-[#80888A] text-base mb-2'>Whatsapp Kami</h6>
-                  <a href="#" className='text-white hover:underline text-xl'>0896 12345 2292</a>
+                  <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Whatsapp Kami</h6>
+                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>0896 12345 2292</a>
                 </div>
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
-                <Image src={"/footer/location-icon.png"} width={40} height={40} className='self-start scale-[.75]' />
+                <Image src={"/footer/location-icon.png"} alt='location icon' width={40} height={40} className='self-start scale-[.75]' />
                 <div>
-                  <h6 className='text-[#80888A] text-base mb-2'>Workshop</h6>
-                  <a href="#" className='text-white hover:underline text-xl'>Jl. diponegoro xxxx xxx xxx</a>
+                  <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Workshop</h6>
+                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>Jl. diponegoro xxxx xxx xxx</a>
                 </div>
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
-                <Image src={"/footer/email-icon.png"} width={40} height={40} className='self-start' />
+                <Image src={"/footer/email-icon.png"} alt='email icon' width={40} height={40} className='self-start' />
                 <div>
-                  <h6 className='text-[#80888A] text-base mb-2'>Whatsapp Kami</h6>
-                  <a href="#" className='text-white hover:underline text-xl'>0896 12345 2292</a>
+                  <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Whatsapp Kami</h6>
+                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>0896 12345 2292</a>
                 </div>
             </motion.div>
 
@@ -47,23 +48,23 @@ const Footer = () => {
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='space-y-4 sm:flex-1'>
               <h5 className='mb-8 text-white font-medium'>NAVIGASI</h5>
               <div className='flex gap-2'>
-                <Image src={"/footer/arrow-icon.svg"} width={15} height={15} />
+                <Image src={"/footer/arrow-icon.svg"} alt='list arrow' width={15} height={15} />
                 <Link href="/" className='text-white hover:underline'>Home</Link>
               </div>
               <div className='flex gap-2'>
-                <Image src={"/footer/arrow-icon.svg"} width={15} height={15} />
+                <Image src={"/footer/arrow-icon.svg"} alt='list arrow' width={15} height={15} />
                 <Link href="/about" className='text-white hover:underline'>About</Link>
               </div>
               <div className='flex gap-2'>
-                <Image src={"/footer/arrow-icon.svg"} width={15} height={15} />
+                <Image src={"/footer/arrow-icon.svg"} alt='list arrow' width={15} height={15} />
                 <Link href="/services" className='text-white hover:underline'>Services</Link>
               </div>
               <div className='flex gap-2'>
-                <Image src={"/footer/arrow-icon.svg"} width={15} height={15} />
+                <Image src={"/footer/arrow-icon.svg"} alt='list arrow' width={15} height={15} />
                 <Link href="/gallery" className='text-white hover:underline'>Gallery</Link>
               </div> 
               <div className='flex gap-2'>
-                <Image src={"/footer/arrow-icon.svg"} width={15} height={15} />
+                <Image src={"/footer/arrow-icon.svg"} alt='list arrow' width={15} height={15} />
                 <Link href="/contact" className='text-white hover:underline'>Contact</Link>
               </div>
             </motion.div>
@@ -77,19 +78,19 @@ const Footer = () => {
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='sm:flex-1'>
               <p className='text-[#B6BDBF] mb-8'>Follow kita di Instagram untuk mendapatkan update tentang promo-promo menarik</p>
               <a href="https://www.instagram.com/21cleanshoes/" target='_blank'>
-                <Image src={"/footer/ig-follow-button.png"} width={150} height={150} />
+                <Image src={"/footer/ig-follow-button.png"} alt='instagram follow button' width={150} height={150} />
               </a>
             </motion.div>
           </div>
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex justify-center py-12 gap-8'>
             <a href="https://es-la.facebook.com/21cleanshoes/photos/" target='_blank'>
-              <Image src={"/footer/fb-icon.svg"} width={50} height={50} />
+              <Image src={"/footer/fb-icon.svg"} alt='facebook follow button' width={50} height={50} />
             </a>
             <a href="https://www.instagram.com/21cleanshoes/" target='_blank'>
-              <Image src={"/footer/ig-icon.svg"} width={50} height={50} />
+              <Image src={"/footer/ig-icon.svg"} alt='instagram follow button' width={50} height={50} />
             </a>
             <a href="https://wa.link/ovmaki" target='_blank'>
-              <Image src={"/footer/wa-icon.svg"} width={50} height={50} target='_blank' />
+              <Image src={"/footer/wa-icon.svg"} alt='whatsapp contact button' width={50} height={50} target='_blank' />
             </a>
           </motion.div>
           <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='text-[#B6BDBF]'>
