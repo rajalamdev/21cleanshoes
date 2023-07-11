@@ -55,15 +55,17 @@ import { usePathname } from "next/navigation";
 
   useEffect(() => {
     const nav = document.querySelector("nav");
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-
-      if (scrollTop >= 100){
-        nav.classList.add("active")
-      } else {
-        nav.classList.remove("active")
-      }
-    })
+    if (nav != null){
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+  
+        if (scrollTop >= 100){
+          nav.classList.add("active")
+        } else {
+          nav.classList.remove("active")
+        }
+      })
+    }
   }, [])
 
   function toggleSidebar(){

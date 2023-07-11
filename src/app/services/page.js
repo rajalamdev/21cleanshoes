@@ -5,6 +5,9 @@ export default function Services(){
     return (
         <>
             <Navbar />
+            <main>
+                
+            </main>
             <Footer />
         </>
     )

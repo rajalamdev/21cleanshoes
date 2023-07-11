@@ -5,9 +5,9 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { wrap } from "framer-motion";
 import { images, testimonials } from "../../utils/data";
 import Navbar from "./components/Navbar";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import Footer from "./components/Footer";
+import ServicesCard from "./components/ServiceCard";
+import TestimonialSlider from "./components/TestimonialSlider";
 
   const fadeIn = {
     hidden: {
@@ -21,32 +21,13 @@ import Footer from "./components/Footer";
     }
   }
 
-  const swipe = {
-    hidden: (direction) => {
-      return {
-        x: direction > 0 ? 1000 : -1000,
-        opacity: 0
-      }
-    },
-    visible: {
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction) => {
-      return {
-        x: direction < 0 ? 1000 : -1000,
-        opacity: 0
-      }
-    }
-  }
 
-
-  const fadeInPopUp = {
-    hidden: {
+const fadeInPopUp = {
+  hidden: {
       opacity: 0,
       scale: 0.5,
     },
-    visible: {
+  visible: {
       opacity: 1,
       scale: 1,
     }
@@ -111,10 +92,8 @@ const swipePower = (offset, velocity) => {
 
 export default function Home() {
   const [[page, direction], setPage] = useState([0, 0]);
-  const [[pageTesti, directionTesti], setPageTesti] = useState([0, 0]);
   
   const imageIndex = wrap(0, images.length, page);
-  const testiIndex = wrap(0, testimonials.length, pageTesti);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,10 +105,6 @@ export default function Home() {
   const paginate = (newDirection) => {
     setPage([page + newDirection, newDirection]);
   };
-
-  const testiPaginateHandler = (newDirection) => {
-    setPageTesti([pageTesti + newDirection, newDirection])
-  }
 
   const beforeAfterHeader = ["BEFORE", "AFTER"]
   const beforeAfterText = ["Potret sepatu sebelum dicuci menggunakan jasa 21Cleanshoes", "Potret sepatu setelah dicuci menggunakan jasa 21Cleanshoes"]
@@ -278,17 +253,9 @@ export default function Home() {
             <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">OUR SERVICES</motion.h2>
           </motion.div>
           <motion.div variants={container} initial={false} whileInView="visible" className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
+            {services.map((service, i) => {
               return (
-                <motion.div key={service.headline} variants={slideUp} initial="hidden" whileInView="visible" className="bg-white py-12 flex flex-col items-center h-full rounded-xl">
-                    <div>
-                      <Image src={service.image} width={250} height={300} alt="services image" />
-                    </div>
-                    <div className="-mt-12 space-y-4 px-12">
-                      <h3 className="text-center font-semibold md:text-lg border-b-2 border-b-black pb-2 w-max mx-auto">{service.headline}</h3>
-                      <p className="text-center text-[#333]">{service.desc}</p>
-                    </div>
-                </motion.div>
+                <ServicesCard key={i} service={...service} />
               )
             })}
           </motion.div>
@@ -323,31 +290,7 @@ export default function Home() {
             {"Detail ->"}
           </motion.button>
         </section>
-        <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
-            <motion.button onClick={() => testiPaginateHandler(-1)} variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-8">
-              <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi left arrow button" className="scale-[.8] sm:scale-100 cursor-pointer" />
-            </motion.button>
-            <AnimatePresence mode="wait" custom={directionTesti} >
-              <motion.div className="flex items-center flex-col" key={pageTesti} variants={swipe} custom={directionTesti} initial="hidden" animate="visible" exit="exit" transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: {duration: 0.2}
-                }}>
-                <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="relative">
-                  <Image alt="quote icon" src={"/quote.png"} width={30} height={30} className="absolute sm:-left-16 -left-8 -top-8" />
-                  <p className="text-white text-base text-center sm:text-xl w-60 sm:w-[560px]">{testimonials[testiIndex].headline}</p>
-                  <Image alt="quote icon" src={"/quote.png"} width={30} height={30} className="rotate-180 absolute sm:-right-16 -right-8" />
-                </motion.div>
-                <motion.div initial={{opacity: 0, width: 0}} whileInView={{opacity: 1, width: 96}} className="mt-8 h-[2px] w-24 bg-white"></motion.div>
-                  <motion.p variants={fadeIn} initial="hidden" whileInView="visible" className="text-white mt-8">{testimonials[testiIndex].name}</motion.p >
-                <motion.div variants={fadeIn} initial="hidden" whileInView="visible">
-                  <Image src={testimonials[testiIndex].image} alt="Testimonial person image" width={80} height={80} className="rounded-full mt-8 scale-90 sm:scale-100" />
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
-            <motion.button onClick={() => testiPaginateHandler(1)} variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-10">
-              <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi right arrow button" className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
-            </motion.button>
-        </section>
+        <TestimonialSlider />
         <Footer />
       </main>
     </>
