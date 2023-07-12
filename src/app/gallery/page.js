@@ -70,11 +70,11 @@ export default function Gallery(){
                         <span>/</span>
                         <span className="text-black/60">Gallery</span>
                     </motion.div>
-                    <div className="mt-12 columns-2 lg:columns-3 gap-4">
+                    <div className="mt-12 columns-2 lg:columns-3 gap-2 sm:gap-4">
                       {galleries.map((gallery, i) => {
                         return (
-                          <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="mb-4 break-inside-avoid rounded-lg overflow-hidden mx-auto">
-                            <Image src={gallery} width={300} height={300} alt="gallery" className="w-full aspect-auto"/>
+                          <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="mb-2 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden mx-auto">
+                            <Image loading="lazy" src={gallery} width={300} height={300} alt="gallery" className="w-full aspect-auto"/>
                           </motion.div>
                         )
                       })}

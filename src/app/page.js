@@ -279,11 +279,11 @@ export default function Home() {
           <motion.div variants={widthToRight} initial="hidden" whileInView="visible" className="border-b-[3px] pb-2">
             <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
           </motion.div>
-          <div className="mt-8 columns-2 lg:columns-3 gap-4">
+          <div className="mt-8 columns-2 lg:columns-3 gap-2 sm:gap-4">
             {galleries.map((gallery, i) => {
               return (
-                <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="break-inside-avoid mb-4 rounded-lg overflow-hidden mx-auto">
-                  <Image src={gallery} width={400} height={400} alt="gallery image" className="w-full aspect-auto" />
+                <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="break-inside-avoid mb-2 sm:mb-4 rounded-lg overflow-hidden mx-auto">
+                  <Image loading="lazy"  src={gallery} width={400} height={400} alt="gallery image" className="w-full aspect-auto" />
                 </motion.div>
               )
             })}
