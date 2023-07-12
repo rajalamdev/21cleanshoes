@@ -5,6 +5,7 @@ import SimpleMap from "../components/GoogleMap";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import ContactForm from "../components/ContactForm";
 
 const widthToRight = {
     hidden: {
@@ -51,15 +52,24 @@ export default function Contact(){
                 <section className="bg-white px-6 md:px-12 lg:px-24">
                   <SimpleMap />
                 </section>
-                <section className="bg-white py-12 px-6 md:px-12 lg:px-24">
-                  <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
+                <section className="bg-white py-12 px-6 md:px-12 lg:px-24 flex flex-col gap-8 flex-wrap">
+                  <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-4'>
                     <Image src={"/contact/location-icon-black.png"} alt='location icon' width={40} height={40} className='self-start scale-[.75]' />
                     <div>
                       <h6 className='text-[#80888A] text-base mb-2'>Workshop</h6>
                       <a href="https://goo.gl/maps/yEdcs8GTYHeoG7Cr9" target="_blank" className='text-black hover:underline text-sm'>Jl. Pelabuhan II, Nyomplong, Kec. Warudoyong, Kota Sukabumi, Jawa Barat 43131</a>
+                      <p className="text-sm text-black/60 mt-2">Sukabumi - Indonesia</p>
+                    </div>
+                  </motion.div>
+                  <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-4'>
+                    <Image src={"/contact/time-icon-black.png"} alt='location icon' width={40} height={40} className='self-start' />
+                    <div>
+                      <h6 className='text-[#80888A] text-base mb-2'>Jam Operasional</h6>
+                      <a href="https://goo.gl/maps/yEdcs8GTYHeoG7Cr9" target="_blank" className='text-black hover:underline text-sm'>Senin - Jumat : 08.00 - 17.00</a>
                     </div>
                   </motion.div>
                 </section>
+                <ContactForm />
             </main>
             <Footer />
         </>

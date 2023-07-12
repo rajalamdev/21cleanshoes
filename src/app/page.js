@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ServicesCard from "./components/ServiceCard";
 import TestimonialSlider from "./components/TestimonialSlider";
+import Link from "next/link";
 
   const fadeIn = {
     hidden: {
@@ -127,8 +128,10 @@ export default function Home() {
     },
   ]
 
-  const galleries = ["/gallery/gallery-1.png", "/gallery/gallery-1.png", "/gallery/gallery-1.png",
-  "/gallery/gallery-1.png", "/gallery/gallery-1.png", "/gallery/gallery-1.png"]
+  const galleries = ["/gallery/gallery-1.jpeg", "/gallery/gallery-2.jpeg", "/gallery/gallery-3.jpeg",
+  "/gallery/gallery-4.jpeg", "/gallery/gallery-5.jpeg", "/gallery/gallery-6.jpeg",
+  "/gallery/gallery-7.jpeg", "/gallery/gallery-8.jpeg", "/gallery/gallery-9.jpeg",
+  "/gallery/gallery-10.jpeg", "/gallery/gallery-11.jpeg", "/gallery/gallery-12.jpeg",]
 
   return (
     <>
@@ -197,15 +200,17 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 justify-center sm:pl-20 items-end gap-8">
-                <motion.a href="/contact"
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  whileTap={{ scale: .9 }}
-                  className="bg-[#333] text-white text-center w-36 font-medium active:scale-90 transition-all rounded-md px-4 py-[8px]"
-                  >
-                  Contact
-                </motion.a>
+                <Link href="/contact">
+                  <motion.div
+                    variants={fadeIn}
+                    initial="hidden"
+                    whileInView="visible"
+                    whileTap={{ scale: .9 }}
+                    className="bg-[#333] text-white text-center w-36 font-medium active:scale-90 transition-all rounded-md px-4 py-[8px]"
+                    >
+                    Contact
+                  </motion.div>
+                </Link>
                 <motion.a href="https://wa.link/ovmaki"
                     variants={fadeIn}
                     initial="hidden"
@@ -235,14 +240,14 @@ export default function Home() {
               <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nisi, placeat fugit id veritatis iure explicabo a asperiores, reiciendis facere incidunt voluptas quae est officia eveniet sequi ut consectetur inventore minima eaque quisquam dolore nulla maxime! Blanditiis dicta tenetur voluptates molestias inventore exercitationem, aliquam obcaecati error commodi soluta totam eum dolore dolorum? Asperiores neque voluptatibus vero dicta porro nostrum id.</motion.p>
               <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi ut recusandae laudantium vitae delectus ipsa? Beatae iure quod ipsa quas veniam, maiores eligendi in vitae. Laborum, adipisci fugit at laudantium earum libero consequatur sit, dolorum repellendus accusamus harum itaque.</motion.p>
               <motion.p variants={fadeIn} initial="hidden" whileInView="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aperiam, voluptate quos fugiat adipisci necessitatibus officiis recusandae aut eligendi molestias ad, natus velit obcaecati sit reiciendis deserunt quis mollitia ipsam quaerat laborum voluptatem! Delectus maxime explicabo temporibus, reiciendis molestiae aliquid mollitia cumque magnam nisi eum quos quibusdam, ipsa provident harum?</motion.p>
-              <motion.button
+              {/* <motion.button
                 variants={fadeIn}
                 initial="hidden"
                 whileInView="visible"
                 whileTap={{ scale: .9 }}
                 className="bg-[#333] text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
                 {"Detail ->"}
-              </motion.button>
+              </motion.button> */}
             </div>
           </div>
         </motion.section>
@@ -259,36 +264,40 @@ export default function Home() {
               )
             })}
           </motion.div>
-          <motion.button
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            whileTap={{ scale: .9 }}
-            className="bg-[#333] mt-8 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
-            {"Detail ->"}
-          </motion.button>
+          <Link href="/services" className="mx-auto">
+            <motion.button
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              whileTap={{ scale: .9 }}
+              className="bg-[#333] mt-8 sm:mt-6 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
+              {"Detail ->"}
+            </motion.button>
+          </Link>
         </section>
         <section className="px-6 md:px-12 lg:px-24 py-12 flex flex-col">
           <motion.div variants={widthToRight} initial="hidden" whileInView="visible" className="border-b-[3px] pb-2">
             <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
           </motion.div>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-8 columns-2 lg:columns-3 gap-4">
             {galleries.map((gallery, i) => {
               return (
-                <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="rounded-lg overflow-hidden mx-auto">
-                  <Image src={gallery} width={400} height={400} alt="gallery image" />
+                <motion.div key={i} variants={slideUp} initial="hidden" whileInView="visible" className="break-inside-avoid mb-4 rounded-lg overflow-hidden mx-auto">
+                  <Image src={gallery} width={400} height={400} alt="gallery image" className="w-full aspect-auto" />
                 </motion.div>
               )
             })}
           </div>
-          <motion.button
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            whileTap={{ scale: .9 }}
-            className="bg-[#333] mt-8 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
-            {"Detail ->"}
-          </motion.button>
+          <Link href="/gallery" className="mx-auto">
+            <motion.button
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              whileTap={{ scale: .9 }}
+              className="bg-[#333] mt-8 sm:mt-6 mx-auto text-[#fff] font-medium active:scale-90 transition-all rounded-md px-12 py-[8px]">
+              {"Detail ->"}
+            </motion.button>
+          </Link>
         </section>
         <TestimonialSlider />
         <Footer />
