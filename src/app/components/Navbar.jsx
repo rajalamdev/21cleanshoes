@@ -55,10 +55,17 @@ import { usePathname } from "next/navigation";
 
   useEffect(() => {
     const nav = document.querySelector("nav");
+    if (pathname != "/"){
+      nav.classList.add("text-blacks")
+    }
+
+    if (window.scrollY >= 100){
+      nav.classList.add("active")
+    }
+
     if (nav != null){
       window.addEventListener("scroll", () => {
         const scrollTop = window.scrollY;
-  
         if (scrollTop >= 100){
           nav.classList.add("active")
         } else {
@@ -74,7 +81,7 @@ import { usePathname } from "next/navigation";
   
   return (
     <header>
-        <nav className="flex fixed transition-all w-full justify-between py-1 items-center px-6 md:px-12 z-40">
+        <nav className="flex fixed transition-all w-full justify-between py-1 items-center px-6 md:px-12 lg:px-24 z-40">
           <motion.div variants={logo} transition={{
             duration: .2
           }} initial="hidden" animate="visible" className="flex gap-2 items-center scale-75 md:scale-100">

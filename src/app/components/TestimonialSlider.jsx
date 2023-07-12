@@ -36,12 +36,18 @@ const swipe = {
     },
     visible: {
       x: 0,
-      opacity: 1
+      opacity: 1,
+      transition: {
+        duration: .2
+      }
     },
     exit: (direction) => {
       return {
         x: direction < 0 ? 1000 : -1000,
-        opacity: 0
+        opacity: 0,
+        transition: {
+          duration: .3
+        }
       }
     }
   }
@@ -54,11 +60,11 @@ const TestimonialSlider = () => {
     }
 
     return (
-        <section className="relative bg-[url('/testi-bg.png')] h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
-          <motion.button onClick={() => testiPaginateHandler(-1)} variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-8">
+        <section className="relative bg-[url('/testi-bg.png')] px-6 md:px-12 lg:px-24 h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
+          <motion.button onClick={() => testiPaginateHandler(-1)} variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-24">
             <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi left arrow button" className="scale-[.8] sm:scale-100 cursor-pointer" />
           </motion.button>
-          <AnimatePresence mode="wait" custom={directionTesti} >
+          <AnimatePresence mode="wait" custom={directionTesti}>
             <motion.div className="flex items-center flex-col" key={pageTesti} variants={swipe} custom={directionTesti} initial="hidden" animate="visible" exit="exit" transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: {duration: 0.2}
@@ -83,7 +89,7 @@ const TestimonialSlider = () => {
               </motion.div>
             </motion.div>
           </AnimatePresence>
-          <motion.button onClick={() => testiPaginateHandler(1)} variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-10">
+          <motion.button onClick={() => testiPaginateHandler(1)} variants={fadeInPopUp} whileHover={{translateX: 2}} initial="hidden" whileInView="visible" className="absolute right-2 sm:right-24">
             <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi right arrow button" className="scale-[.8] sm:scale-100 rotate-180 cursor-pointer" />
           </motion.button>
         </section>

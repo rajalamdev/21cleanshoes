@@ -135,7 +135,7 @@ export default function Home() {
       <Navbar />
       <main>
         <section className='bg-[url("/bg.png")] h-screen bg-cover bg-center bg-no-repeat'>
-          <div className="w-full flex items-center h-full relative overflow-x-hidden">
+          <div className="w-full flex items-center h-full relative overflow-x-hidden ">
             <motion.div variants={fadeInPopUp} initial="hidden" whileInView="visible" className="-right-4 absolute group z-10">
               <Image src={"/next-arrow.svg"} alt="left arrow" className="group-hover:translate-x-1 active:scale-90 transition-all cursor-pointer" onClick={() => paginate(1)} width={60} height={60} />
             </motion.div>
@@ -166,7 +166,7 @@ export default function Home() {
                 >
                 <Image src={images[imageIndex]} priority width={500} height={500} alt="shoes image" />
             </motion.div>
-            <div className="absolute flex-wrap flex gap-8 flex-col sm:flex-row max-w-full left-0 right-0 px-6 md:px-12 sm:px-24 bottom-24 md:bottom-24">
+            <div className="absolute px-6 md:px-12 lg:px-24 flex-wrap flex gap-8 flex-col sm:flex-row max-w-full left-0 right-0 bottom-24 md:bottom-24">
               <div className="w-full md:w-1/3">
                 <div>
                   <motion.h2 key={page}
@@ -197,7 +197,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 justify-center sm:pl-20 items-end gap-8">
-                <motion.a href="#"
+                <motion.a href="/contact"
                   variants={fadeIn}
                   initial="hidden"
                   whileInView="visible"

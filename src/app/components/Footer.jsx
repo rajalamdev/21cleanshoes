@@ -24,21 +24,21 @@ const Footer = () => {
                 <Image src={"/footer/phone-icon.png"} alt='phone icon' width={40} height={40} className='self-start' />
                 <div>
                   <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Whatsapp Kami</h6>
-                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>0896 12345 2292</a>
+                  <a href="https://wa.link/ovmaki" target='_blank' className='text-white hover:underline text-base sm:text-xl'>081563882792</a>
                 </div>
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
                 <Image src={"/footer/location-icon.png"} alt='location icon' width={40} height={40} className='self-start scale-[.75]' />
                 <div>
                   <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Workshop</h6>
-                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>Jl. diponegoro xxxx xxx xxx</a>
+                  <a href="https://goo.gl/maps/yEdcs8GTYHeoG7Cr9" target='_blank' className='text-white hover:underline text-base sm:text-xl'>Jl. Pelabuhan II, Nyomplong, Kec. Warudoyong, Kota Sukabumi, Jawa Barat 43131</a>
                 </div>
             </motion.div>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
                 <Image src={"/footer/email-icon.png"} alt='email icon' width={40} height={40} className='self-start' />
                 <div>
-                  <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Whatsapp Kami</h6>
-                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>0896 12345 2292</a>
+                  <h6 className='text-[#80888A] text-sm sm:text-base mb-2'>Email Kami</h6>
+                  <a href="#" className='text-white hover:underline text-base sm:text-xl'>21cleanshoe@gmail.com</a>
                 </div>
             </motion.div>
 

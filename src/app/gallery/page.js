@@ -29,7 +29,7 @@ const widthToRight = {
     }
 }
 
-export default function Services(){
+export default function Gallery(){
     return (
         <>
             <Navbar />
@@ -38,12 +38,12 @@ export default function Services(){
                     <motion.div variants={widthToRight}
                             initial="hidden"
                             whileInView="visible" className="border-b-[3px] pb-2 mb-12">
-                            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">SERVICES</motion.h2>
+                            <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
                     </motion.div>
                     <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className="flex-1 text-sm sm:text-base flex justify-end space-x-4">
                         <Link href="/" className="font-medium">Home</Link>
                         <span>/</span>
-                        <span className="text-black/60">Services</span>
+                        <span className="text-black/60">Gallery</span>
                     </motion.div>
                 </section>
             </main>
