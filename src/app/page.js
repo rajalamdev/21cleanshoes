@@ -169,7 +169,7 @@ export default function Home() {
                 >
                 <Image src={images[imageIndex]} priority width={500} height={500} alt="shoes image" />
             </motion.div>
-            <div className="absolute px-6 md:px-12 lg:px-24 flex-wrap flex gap-8 flex-col sm:flex-row max-w-full left-0 right-0 bottom-24 md:bottom-24">
+            <div className="absolute px-4 md:px-12 lg:px-24 flex-wrap flex gap-8 flex-col sm:flex-row max-w-full left-0 right-0 bottom-24 md:bottom-24">
               <div className="w-full md:w-1/3">
                 <div>
                   <motion.h2 key={page}
@@ -199,7 +199,7 @@ export default function Home() {
                   </motion.p>
                 </div>
               </div>
-              <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 justify-center sm:pl-20 items-end gap-8">
+              <div className="w-full md:flex-1 flex sm:justify-start sm:-mb-8 sm:pl-20 items-end gap-8">
                 <Link href="/contact">
                   <motion.div
                     variants={fadeIn}
@@ -223,7 +223,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <motion.section variants={container} initial="closed" whileInView="open" className="px-6 md:px-12 lg:px-24 py-12 h-max lg:h-screen">
+        <motion.section variants={container} initial="closed" whileInView="open" className="px-4 md:px-12 lg:px-24 py-12 h-max lg:h-screen">
           <motion.div 
             variants={widthToRight}
             initial="hidden"
@@ -251,7 +251,7 @@ export default function Home() {
             </div>
           </div>
         </motion.section>
-        <section className="px-6 md:px-12 lg:px-24 h-max lg:h-screen py-12 bg-[#F4F5F9] flex flex-col">
+        <section className="px-4 md:px-12 lg:px-24 h-max lg:h-screen py-12 bg-[#F4F5F9] flex flex-col">
           <motion.div variants={widthToRight}
             initial="hidden"
             whileInView="visible" className="border-b-[3px] pb-2">
@@ -275,7 +275,7 @@ export default function Home() {
             </motion.button>
           </Link>
         </section>
-        <section className="px-6 md:px-12 lg:px-24 py-12 flex flex-col">
+        <section className="px-4 md:px-12 lg:px-24 py-12 flex flex-col">
           <motion.div variants={widthToRight} initial="hidden" whileInView="visible" className="border-b-[3px] pb-2">
             <motion.h2 variants={fadeIn} initial="hidden" whileInView="visible" className="text-lg md:text-2xl after:mt-2 font-bold after:block w-max after:h-[3px] after:left-0 after:right-0 after:absolute relative after:bg-black ">GALLERY</motion.h2>
           </motion.div>

@@ -34,7 +34,7 @@ export default function Services(){
         <>
             <Navbar />
             <main>
-                <section className="bg-white pt-36 pb-12 px-6 md:px-12 lg:px-24">
+                <section className="bg-white pt-36 pb-12 px-4 md:px-12 lg:px-24">
                     <motion.div variants={widthToRight}
                             initial="hidden"
                             whileInView="visible" className="border-b-[3px] pb-2 mb-12">

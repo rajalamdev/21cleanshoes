@@ -37,7 +37,7 @@ export default function Contact(){
         <>
             <Navbar />
             <main>
-                <section className="bg-white pt-36 pb-12 px-6 md:px-12 lg:px-24">
+                <section className="bg-white pt-36 pb-12 px-4 md:px-12 lg:px-24">
                     <motion.div variants={widthToRight}
                             initial="hidden"
                             whileInView="visible" className="border-b-[3px] pb-2 mb-12">
@@ -49,10 +49,10 @@ export default function Contact(){
                         <span className="text-black/60">Contact</span>
                     </motion.div>
                 </section>
-                <section className="bg-white px-6 md:px-12 lg:px-24">
+                <section className="bg-white px-4 md:px-12 lg:px-24">
                   <SimpleMap />
                 </section>
-                <section className="bg-white py-12 px-6 md:px-12 lg:px-24 flex flex-col gap-8 flex-wrap">
+                <section className="bg-white py-12 px-4 md:px-12 lg:px-24 flex flex-col gap-8 flex-wrap">
                   <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-4'>
                     <Image src={"/contact/location-icon-black.png"} alt='location icon' width={40} height={40} className='self-start scale-[.75]' />
                     <div>

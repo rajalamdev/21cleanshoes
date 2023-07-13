@@ -47,7 +47,8 @@ const swipe = {
         opacity: 0,
         transition: {
           duration: .3
-        }
+        },
+        PointerEvent: "none"
       }
     }
   }
@@ -60,7 +61,7 @@ const TestimonialSlider = () => {
     }
 
     return (
-        <section className="relative bg-[url('/testi-bg.png')] px-6 md:px-12 lg:px-24 h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
+        <section className="relative bg-[url('/testi-bg.png')] px-4 md:px-12 lg:px-24 h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center">
           <motion.button onClick={() => testiPaginateHandler(-1)} variants={fadeInPopUp} whileHover={{translateX: -2}} initial="hidden" whileInView="visible" className="absolute left-2 sm:left-24">
             <Image src={"/testimonials/arrow.png"} width={60} height={60} alt="testi left arrow button" className="scale-[.8] sm:scale-100 cursor-pointer" />
           </motion.button>

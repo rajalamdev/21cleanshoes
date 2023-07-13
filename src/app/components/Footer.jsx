@@ -19,7 +19,7 @@ const fadeIn = {
 const Footer = () => {
   return (
     <footer className='snap-start relative'>
-        <div className='bg-[#272D2E] flex justify-between flex-wrap gap-8 py-12 md:px-12 lg:px-24 px-6'>
+        <div className='bg-[#272D2E] flex justify-between flex-wrap gap-8 py-12 md:px-12 lg:px-24 px-4'>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='flex gap-8'>
                 <Image src={"/footer/phone-icon.png"} alt='phone icon' width={40} height={40} className='self-start' />
                 <div>
@@ -43,7 +43,7 @@ const Footer = () => {
             </motion.div>
 
         </div >
-        <div className='bg-[#343C3E] py-12 md:px-12 lg:px-24 px-6'>
+        <div className='bg-[#343C3E] py-12 md:px-12 lg:px-24 px-4'>
           <div className='flex justify-self sm:justify-center flex-wrap sm:gap-8 gap-20'>
             <motion.div variants={fadeIn} initial="hidden" whileInView="visible" className='space-y-4 sm:flex-1'>
               <h5 className='mb-8 text-white font-medium'>NAVIGASI</h5>
